@@ -69,24 +69,31 @@ export default {
 </script>
 
 <template>
-  <div :style="chartStyle" >
+  <div :style="chartStyle">
     <svg :height="height" :width="width">
       <g
         v-if="baseConfig.hasXAxisBackgroundLines !== false"
         v-html="chartBuilder.renderXAxisLines()"
       />
+      <g
+        v-if="baseConfig.hasYAxisBackgroundLines !== false"
+        v-html="chartBuilder.renderYAxisLines()"
+      />
+      <g v-if="baseConfig.renderXAxisLabels !== false" v-html="chartBuilder.renderXAxisLabels()" />
+      <g v-if="baseConfig.renderYAxisLabels !== false" v-html="chartBuilder.renderYAxisLabels()" />
       <g>
         <rect
           v-for="(val, i) in data"
           :key="i"
-          :x="(i * chartBuilder.yLabelSlotWidth) + (slotGap / 2) +
-            chartBuilder.leftAlignedXAxisLabelWidth"
+          :x="
+            i * chartBuilder.yLabelSlotWidth + slotGap / 2 + chartBuilder.leftAlignedXAxisLabelWidth
+          "
           :y="baseHeight - chartBuilder.calcDataPointHeight(val)"
           :rx="barRadius"
           :width="barWidth"
-          :height="chartBuilder.calcDataPointHeight(val) < 0
-            ? 0
-            : chartBuilder.calcDataPointHeight(val)"
+          :height="
+            chartBuilder.calcDataPointHeight(val) < 0 ? 0 : chartBuilder.calcDataPointHeight(val)
+          "
           :fill="barColor"
         />
       </g>
