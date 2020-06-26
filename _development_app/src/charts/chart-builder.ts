@@ -1,6 +1,5 @@
 import { BaseChartConfig } from './types';
 
-/* eslint-disable */
 export default class ChartBuilder {
   data: number[];
 
@@ -153,8 +152,7 @@ export default class ChartBuilder {
     if (this.xAxisLabelStyle) {
       this.xAxisLabelWidth = this.xAxisLabelStyle.width || this.xAxisLabelWidth;
       this.xAxisLabelPosition = this.xAxisLabelStyle.position || this.xAxisLabelPosition;
-      this.leftAlignedXAxisLabelWidth =
-        this.xAxisLabelPosition === 'left' ? this.xAxisLabelWidth : 0;
+      this.leftAlignedXAxisLabelWidth = this.xAxisLabelPosition === 'left' ? this.xAxisLabelWidth : 0;
     }
 
     this.yLabelSlotWidth = (this.width - this.xAxisLabelWidth) / this.data.length;
@@ -180,8 +178,8 @@ export default class ChartBuilder {
     }
     if (this.minVal >= 0 && max >= 0) {
       return (
-        (this.height - this.yAxisLabelHeight) *
-        ((val - this.minVal) / this.deltaBetweenGreatestAndLeast)
+        (this.height - this.yAxisLabelHeight)
+        * ((val - this.minVal) / this.deltaBetweenGreatestAndLeast)
       );
     }
     return this.height * ((val - max) / this.deltaBetweenGreatestAndLeast);
@@ -230,11 +228,11 @@ export default class ChartBuilder {
       newHTML += `<line
             key=${Math.random()}
             x1=${
-              i * this.yLabelSlotWidth + this.yLabelSlotWidth / 2 + this.leftAlignedXAxisLabelWidth
-            }
+  i * this.yLabelSlotWidth + this.yLabelSlotWidth / 2 + this.leftAlignedXAxisLabelWidth
+}
             x2=${
-              i * this.yLabelSlotWidth + this.yLabelSlotWidth / 2 + this.leftAlignedXAxisLabelWidth
-            }
+  i * this.yLabelSlotWidth + this.yLabelSlotWidth / 2 + this.leftAlignedXAxisLabelWidth
+}
             y1=${0}
             y2=${this.baseHeight}
             stroke=${color}
@@ -273,24 +271,21 @@ export default class ChartBuilder {
     let newHTML: string;
 
     [...new Array(this.xAxisLabelCount + 1)].forEach((_, i) => {
-      const label: string =
-        prefix +
-        (
-          (this.deltaBetweenGreatestAndLeast / this.xAxisLabelCount) *
-            Math.abs(i - this.xAxisLabelCount - 1) +
-          (this.startAtZero ? 0 : Math.min(...this.data))
+      const label: string = prefix
+        + (
+          (this.deltaBetweenGreatestAndLeast / this.xAxisLabelCount)
+            * Math.abs(i - this.xAxisLabelCount - 1)
+          + (this.startAtZero ? 0 : Math.min(...this.data))
         )
           .toFixed(decimals)
-          .toString() +
-        suffix;
+          .toString()
+        + suffix;
 
-      const x =
-        (this.xAxisLabelPosition === 'right' ? this.width - this.xAxisLabelWidth : 0) +
-        xOffset +
-        (fontSize * label.length) / 2;
-      // eslint-disable-next-line max-len
-      const y =
-        this.yDistanceBetweenXLabels * i - this.yDistanceBetweenXLabels + fontSize + yOffset;
+      const x = (this.xAxisLabelPosition === 'right' ? this.width - this.xAxisLabelWidth : 0)
+        + xOffset
+        + (fontSize * label.length) / 2;
+      const y = this.yDistanceBetweenXLabels
+                * i - this.yDistanceBetweenXLabels + fontSize + yOffset;
 
       newHTML += `<text
           key=${Math.random()}
@@ -318,7 +313,8 @@ export default class ChartBuilder {
     let fontSize = 14;
     let fontWeight: number | string = 500;
     let color = '#000000';
-    let position = 'bottom';
+    // will be used in the future.
+    // let position = 'bottom';
 
     if (this.yAxisLabelStyle) {
       xOffset = this.yAxisLabelStyle.xOffset || xOffset;
@@ -328,18 +324,16 @@ export default class ChartBuilder {
       fontSize = this.yAxisLabelStyle.fontSize || fontSize;
       fontWeight = this.yAxisLabelStyle.fontWeight || fontWeight;
       color = this.yAxisLabelStyle.color || color;
-      position = this.yAxisLabelStyle.position || position;
+      // position = this.yAxisLabelStyle.position || position;
     }
 
     let newHTML: string;
 
     this.labels.forEach((label, i) => {
-      //TODO: 'yLabelSlothWidth / 3' is close enough, but not accurate
-      const x =
-        i * this.yLabelSlotWidth +
-        this.yLabelSlotWidth / 2 +
-        xOffset +
-        this.leftAlignedXAxisLabelWidth;
+      const x = i * this.yLabelSlotWidth
+        + this.yLabelSlotWidth / 2
+        + xOffset
+        + this.leftAlignedXAxisLabelWidth;
       const y = this.baseHeight - fontSize + yOffset;
 
       newHTML += `<text
