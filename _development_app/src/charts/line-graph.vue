@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import ChartBuilder from './chart-builder';
 
-export default {
+export default Vue.extend({
   props: {
     data: {
       type: Array,
@@ -71,7 +72,7 @@ export default {
     });
   },
   methods: {
-    calcXPosition(val) {
+    calcXPosition(val): number {
       return (
         (val * (this.width - this.chartBuilder.xAxisLabelWidth)) / (this.data.length - 1)
         + this.chartBuilder.leftAlignedXAxisLabelWidth
@@ -79,35 +80,35 @@ export default {
       );
     },
 
-    calcYPosition(val) {
+    calcYPosition(val): number {
       return (
         this.baseHeight - this.chartBuilder.calcDataPointHeight(val) + this.heightAdjustments / 2
       );
     },
   },
   computed: {
-    widthAdjustments() {
+    widthAdjustments(): number {
       if (this.hasDots) {
         return this.chartBuilder.xAxisLabelPosition === 'right' ? this.dotSize : -this.dotSize;
       }
       return 0.01;
     },
 
-    heightAdjustments() {
+    heightAdjustments(): number {
       return this.dotSize > this.lineWidth ? this.dotSize : this.lineWidth;
     },
 
-    getLinePoints() {
+    linePoints(): string {
       return this.data
         .map((d, i) => `${this.calcXPosition(i)},${this.calcYPosition(d)}`)
         .join(' ');
     },
 
-    getBezierLinePath() {
+    bezierLinePath(): string {
       if (this.data.length === 0) {
         return 'M0,0';
       }
-      const points = this.data.slice(0, this.data.length - 1);
+      const points: string = this.data.slice(0, this.data.length - 1);
 
       const paths = points.map((_, i) => {
         const xMid = (this.calcXPosition(i) + this.calcXPosition(i + 1)) / 2;
@@ -125,8 +126,8 @@ export default {
         .concat(paths)
         .join(' ');
     },
-    renderLine() {
-      const points = this.getLinePoints;
+    line(): string {
+      const points: string = this.linePoints;
       return `<polyline
         key="${Math.random()}"
         points="${points}"
@@ -136,8 +137,8 @@ export default {
         />`;
     },
 
-    renderDots() {
-      let newHTML;
+    dots(): string {
+      let newHTML: string;
       this.data.forEach((d, i) => {
         newHTML += `<circle
           key=${Math.random()}
@@ -150,8 +151,8 @@ export default {
       return newHTML;
     },
 
-    renderBezierLine() {
-      const d = this.getBezierLinePath;
+    bezierLine(): string {
+      const d: string = this.bezierLinePath;
       return `<path
         key="${Math.random()}"
         d="${d}"
@@ -161,8 +162,8 @@ export default {
          />`;
     },
 
-    renderShadow() {
-      const points = `${this.getLinePoints} ${this.shadowStart},${this.baseHeight} ${this.shadowEnd},${this.baseHeight}`;
+    shadow(): string {
+      const points = `${this.linePoints} ${this.shadowStart},${this.baseHeight} ${this.shadowEnd},${this.baseHeight}`;
       return `<polygon
         key="${Math.random()}"
         points="${points}"
@@ -171,8 +172,8 @@ export default {
         />`;
     },
 
-    renderBezierShadow() {
-      const d = `${this.getBezierLinePath} L${this.shadowStart},${this.baseHeight} L${this.shadowEnd},${this.baseHeight} Z`;
+    bezierShadow(): string {
+      const d = `${this.bezierLinePath} L${this.shadowStart},${this.baseHeight} L${this.shadowEnd},${this.baseHeight} Z`;
       return `<path
         key="${Math.random()}"
         d="${d}"
@@ -181,15 +182,15 @@ export default {
         />`;
     },
 
-    shadowStart() {
+    shadowStart(): number {
       return this.calcXPosition(this.data.length - 1);
     },
 
-    shadowEnd() {
+    shadowEnd(): number {
       return this.calcXPosition(0);
     },
 
-    baseHeight() {
+    baseHeight(): number {
       return (
         this.chartBuilder.baseHeight
         + this.heightAdjustments / 2
@@ -197,7 +198,7 @@ export default {
       );
     },
   },
-};
+});
 </script>
 
 <template>
@@ -217,11 +218,11 @@ export default {
       />
       <g v-if="baseConfig.hasXAxisLabels !== false" v-html="chartBuilder.renderXAxisLabels()" />
       <g v-if="baseConfig.hasYAxisLabels !== false" v-html="chartBuilder.renderYAxisLabels()" />
-      <g v-if="hasLine && isBezier !== false" v-html="this.renderBezierLine" />
-      <g v-else-if="hasLine" v-html="this.renderLine" />
-      <g v-if="hasShadow && isBezier !== false" v-html="this.renderBezierShadow" />
-      <g v-else-if="hasShadow !== false" v-html="this.renderShadow" />
-      <g v-if="hasDots !== false" v-html="this.renderDots" />
+      <g v-if="hasLine && isBezier !== false" v-html="bezierLine" />
+      <g v-else-if="hasLine" v-html="line" />
+      <g v-if="hasShadow && isBezier !== false" v-html="bezierShadow" />
+      <g v-else-if="hasShadow !== false" v-html="shadow" />
+      <g v-if="hasDots !== false" v-html="dots" />
     </svg>
   </div>
 </template>
