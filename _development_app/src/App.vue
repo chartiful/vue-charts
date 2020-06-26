@@ -1,11 +1,13 @@
 <script>
 import VerticalBarGraph from './charts/vertical-bar-graph.vue';
 import LineGraph from './charts/line-graph.vue';
+import HorizontalBarGraph from './charts/horizontal-bar-graph.vue';
 
 export default {
   components: {
     VerticalBarGraph,
     LineGraph,
+    HorizontalBarGraph,
   },
 };
 </script>
@@ -73,6 +75,34 @@ export default {
         backgroundColor: `#ffffff`,
       }"
     />
+    <br />
+    <br />
+    <div>
+      <HorizontalBarGraph
+        :data="[20, 45, 28, 80, 99, 43, 50]"
+        :labels="['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']"
+        :width="500"
+        :height="500"
+        :barRadius="5"
+        barColor="#0d0a0b"
+        :baseConfig="{
+          hasYAxisBackgroundLines: false,
+          hasXAxisBackgroundLines: false,
+          hasYAxisLabels: false,
+          hasXAxisLabels: false,
+          height: 500,
+          width: 500,
+          data: [20, 45, 28, 80, 99, 43, 50],
+        }"
+        :chartStyle="{
+          marginBottom: 0,
+          padding: 10,
+          paddingTop: 20,
+          borderRadius: 20,
+          backgroundColor: `#ffffff`,
+        }"
+      />
+    </div>
     <br />
     <br />
   </div>
