@@ -1,2 +1,2 @@
 # vue-charts
-Charts for Vue
+SVG Charts for Vue
