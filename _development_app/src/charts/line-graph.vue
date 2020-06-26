@@ -1,5 +1,4 @@
 <script>
-/* eslint-disable */
 import ChartBuilder from './chart-builder';
 
 export default {
@@ -74,9 +73,9 @@ export default {
   methods: {
     calcXPosition(val) {
       return (
-        (val * (this.width - this.chartBuilder.xAxisLabelWidth)) / (this.data.length - 1) +
-        this.chartBuilder.leftAlignedXAxisLabelWidth +
-        this.widthAdjustments
+        (val * (this.width - this.chartBuilder.xAxisLabelWidth)) / (this.data.length - 1)
+        + this.chartBuilder.leftAlignedXAxisLabelWidth
+        + this.widthAdjustments
       );
     },
 
@@ -88,11 +87,10 @@ export default {
   },
   computed: {
     widthAdjustments() {
-      return this.hasDots
-        ? this.chartBuilder.xAxisLabelPosition === 'right'
-          ? this.dotSize
-          : -this.dotSize
-        : 0.01;
+      if (this.hasDots) {
+        return this.chartBuilder.xAxisLabelPosition === 'right' ? this.dotSize : -this.dotSize;
+      }
+      return 0.01;
     },
 
     heightAdjustments() {
@@ -101,9 +99,7 @@ export default {
 
     getLinePoints() {
       return this.data
-        .map((d, i) => {
-          return `${this.calcXPosition(i)},${this.calcYPosition(d)}`;
-        })
+        .map((d, i) => `${this.calcXPosition(i)},${this.calcYPosition(d)}`)
         .join(' ');
     },
 
@@ -119,9 +115,9 @@ export default {
         const cpX1 = (xMid + this.calcXPosition(i)) / 2;
         const cpX2 = (xMid + this.calcXPosition(i + 1)) / 2;
         return (
-          `Q ${cpX1}, ${this.calcYPosition(this.data[i])}, ${xMid}, ${yMid}` +
-          ` Q ${cpX2}, ${this.calcYPosition(this.data[i + 1])}, ${this.calcXPosition(
-            i + 1
+          `Q ${cpX1}, ${this.calcYPosition(this.data[i])}, ${xMid}, ${yMid}`
+          + ` Q ${cpX2}, ${this.calcYPosition(this.data[i + 1])}, ${this.calcXPosition(
+            i + 1,
           )}, ${this.calcYPosition(this.data[i + 1])}`
         );
       });
@@ -142,16 +138,15 @@ export default {
 
     renderDots() {
       let newHTML;
-      this.data.forEach(
-        (d, i) =>
-          (newHTML += `<circle
+      this.data.forEach((d, i) => {
+        newHTML += `<circle
           key=${Math.random()}
           cx=${this.calcXPosition(i)}
           cy=${this.calcYPosition(d)}
           fill=${this.dotColor}
           r=${this.dotSize}
-          />`)
-      );
+        />`;
+      });
       return newHTML;
     },
 
@@ -196,9 +191,9 @@ export default {
 
     baseHeight() {
       return (
-        this.chartBuilder.baseHeight +
-        this.heightAdjustments / 2 -
-        this.chartBuilder.yAxisLabelHeight
+        this.chartBuilder.baseHeight
+        + this.heightAdjustments / 2
+        - this.chartBuilder.yAxisLabelHeight
       );
     },
   },
@@ -208,9 +203,9 @@ export default {
 <template>
   <div :style="chartStyle">
     <svg :height="height" :width="width">
-      <linearGradient :id="'shadow'" :x1="0" :x2="0" :y1="0" :y2="height">
-        <stop :offset="'0'" :stopColor="lineColor" :stopOpacity="0.1" />
-        <stop :offset="'1'" :stopColor="lineColor" :stopOpacity="0" />
+      <linearGradient id="shadow" :x1="0" :x2="0" :y1="0" :y2="height">
+        <stop offset="0" :stop-color="lineColor" stop-opacity="0.1" />
+        <stop offset="1" :stop-color="lineColor" stop-opacity="0" />
       </linearGradient>
       <g
         v-if="baseConfig.hasXAxisBackgroundLines !== false"
@@ -220,12 +215,12 @@ export default {
         v-if="baseConfig.hasYAxisBackgroundLines !== false"
         v-html="chartBuilder.renderYAxisLines()"
       />
-      <g v-if="baseConfig.renderXAxisLabels !== false" v-html="chartBuilder.renderXAxisLabels()" />
-      <g v-if="baseConfig.renderYAxisLabels !== false" v-html="chartBuilder.renderYAxisLabels()" />
+      <g v-if="baseConfig.hasXAxisLabels !== false" v-html="chartBuilder.renderXAxisLabels()" />
+      <g v-if="baseConfig.hasYAxisLabels !== false" v-html="chartBuilder.renderYAxisLabels()" />
       <g v-if="hasLine && isBezier !== false" v-html="this.renderBezierLine" />
       <g v-else-if="hasLine" v-html="this.renderLine" />
       <g v-if="hasShadow && isBezier !== false" v-html="this.renderBezierShadow" />
-      <g v-if="hasShadow !== false" v-html="this.renderShadow" />
+      <g v-else-if="hasShadow !== false" v-html="this.renderShadow" />
       <g v-if="hasDots !== false" v-html="this.renderDots" />
     </svg>
   </div>

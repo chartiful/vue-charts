@@ -22,7 +22,7 @@ export default {
       :lineWidth="5"
       :dotColor="'black'"
       :dotSize="10"
-      :isBezier="false"
+      :isBezier="true"
       :hasDots="true"
       :hasLine="true"
       :hasShadow="true"
