@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import ChartBuilder from './chart-builder';
 
-export default {
+export default Vue.extend({
   props: {
     data: {
       type: Array,
@@ -55,17 +56,17 @@ export default {
     });
   },
   computed: {
-    baseHeight() {
+    baseHeight(): number {
       return this.height - this.chartBuilder.yAxisLabelHeight;
     },
-    barWidth() {
+    barWidth(): number {
       return this.chartBuilder.yLabelSlotWidth * this.barWidthPercentage;
     },
-    slotGap() {
+    slotGap(): number {
       return this.chartBuilder.yLabelSlotWidth - this.barWidth;
     },
   },
-};
+});
 </script>
 
 <template>

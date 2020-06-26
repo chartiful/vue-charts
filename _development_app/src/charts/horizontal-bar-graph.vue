@@ -56,13 +56,13 @@ export default Vue.extend({
     });
   },
   computed: {
-    baseHeight() {
+    baseHeight(): number {
       return this.height - this.chartBuilder.yAxisLabelHeight;
     },
-    barWidth() {
+    barWidth(): number {
       return this.chartBuilder.yLabelSlotWidth * this.barWidthPercentage;
     },
-    slotGap() {
+    slotGap(): number {
       return this.chartBuilder.yLabelSlotWidth - this.barWidth;
     },
   },
