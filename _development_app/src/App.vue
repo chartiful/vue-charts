@@ -1,7 +1,7 @@
 <script>
-import LineGraph from '@chartiful/vue-line-graph/sfc';
-import HorizontalBarGraph from '@chartiful/vue-horizontal-bar-graph/sfc';
-import VerticalBarGraph from '@chartiful/vue-vertical-bar-graph/sfc';
+import LineGraph from '../../line-graph/sfc';
+import HorizontalBarGraph from '../../horizontal-bar-graph/sfc';
+import VerticalBarGraph from '../../vertical-bar-graph/sfc';
 
 export default {
   components: {
