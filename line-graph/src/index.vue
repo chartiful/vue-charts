@@ -46,7 +46,7 @@ export default Vue.extend({
     },
     dotSize: {
       type: Number,
-      defualt: 5,
+      default: 5,
     },
     chartStyle: {
       type: Object,
@@ -108,7 +108,7 @@ export default Vue.extend({
       if (this.data.length === 0) {
         return 'M0,0';
       }
-      const points: string = this.data.slice(0, this.data.length - 1);
+      const points: number[] = this.data.slice(0, this.data.length - 1);
 
       const paths = points.map((_, i) => {
         const xMid = (this.calcXPosition(i) + this.calcXPosition(i + 1)) / 2;

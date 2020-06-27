@@ -1,7 +1,7 @@
 <script>
 import VerticalBarGraph from './charts/vertical-bar-graph.vue';
-import LineGraph from './charts/line-graph.vue';
-import HorizontalBarGraph from './charts/horizontal-bar-graph.vue';
+import LineGraph from '../../line-graph/src/index.vue';
+import HorizontalBarGraph from '../../horizontal-bar-graph/src/index.vue';
 
 export default {
   components: {
