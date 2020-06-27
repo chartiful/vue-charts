@@ -1,14 +1,40 @@
 {
-  "name": "vue-charts",
+  "name": "@chartiful/vue-vertical-bar-graph",
   "version": "0.1.0",
-  "private": true,
+  "description": "Vue vertical bar graph.",
+  "source": "sfc/index.vue",
+  "main": "dist/vertical-bar-graph.umd.js",
+  "module": "dist/vertical-bar-graph.esm.js",
+  "unpkg": "dist/vertical-bar-graph.umd.min.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --target lib --name vertical-bar-graph sfc/index.vue",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chartiful/vue-charts.git",
+    "directory": "vertical-bar-graph"
+  },
+  "keywords": [
+    "vue",
+    "chart",
+    "graph",
+    "data visualization",
+    "vue-graph",
+    "vue-bar-graph",
+    "bar-graph"
+  ],
+  "author": "Caleb Watters, Sean Watters",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chartiful/vue-charts/issues"
+  },
+  "peerDependencies": {
+    "vue": "> 2.0.0",
+    "@chartiful/vue-chart-builder": ">= 0.1.0"
   },
   "devDependencies": {
+    "@chartiful/vue-chart-builder": "latest",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
