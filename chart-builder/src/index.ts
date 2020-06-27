@@ -185,7 +185,7 @@ export default class ChartBuilder {
     return this.height * ((val - max) / this.deltaBetweenGreatestAndLeast);
   }
 
-  public renderXAxisLines() {
+  public renderXAxisLines(): string {
     let color = '#00000';
     let strokeWidth = 1;
 
@@ -194,9 +194,9 @@ export default class ChartBuilder {
       strokeWidth = this.xAxisBackgroundLineStyle.strokeWidth || strokeWidth;
     }
 
-    let newHTML: string;
+    let newHTML: string = '';
 
-    [...new Array((this.xAxisLabelCount || 4) + 1)].forEach((_, i) => {
+    [...new Array((this.xAxisLabelCount || 4) + 1)].forEach((_, i: number) => {
       newHTML += `<line
         x1="${this.leftAlignedXAxisLabelWidth}"
         x2="${this.width - (this.leftAlignedXAxisLabelWidth ? 0 : this.xAxisLabelWidth)}"
@@ -213,7 +213,7 @@ export default class ChartBuilder {
     return newHTML;
   }
 
-  public renderYAxisLines() {
+  public renderYAxisLines(): string {
     let color = '#00000';
     let strokeWidth = 1;
 
@@ -222,7 +222,7 @@ export default class ChartBuilder {
       strokeWidth = this.yAxisBackgroundLineStyle.strokeWidth || strokeWidth;
     }
 
-    let newHTML: string;
+    let newHTML: string = '';
 
     [...new Array(Math.ceil(this.data.length))].forEach((_, i) => {
       newHTML += `<line
@@ -243,7 +243,7 @@ export default class ChartBuilder {
     return newHTML;
   }
 
-  public renderXAxisLabels() {
+  public renderXAxisLabels(): string {
     let xOffset = 0;
     let yOffset = 0;
     let rotation = 0;
@@ -268,9 +268,9 @@ export default class ChartBuilder {
       decimals = this.xAxisLabelStyle.decimals || decimals;
     }
 
-    let newHTML: string;
+    let newHTML: string = '';
 
-    [...new Array(this.xAxisLabelCount + 1)].forEach((_, i) => {
+    [...new Array(this.xAxisLabelCount + 1)].forEach((_, i: number) => {
       const label: string = prefix
         + (
           (this.deltaBetweenGreatestAndLeast / this.xAxisLabelCount)
@@ -305,7 +305,7 @@ export default class ChartBuilder {
     return newHTML;
   }
 
-  public renderYAxisLabels() {
+  public renderYAxisLabels(): string {
     let xOffset = 0;
     let yOffset = 0;
     let rotation = 0;
@@ -327,9 +327,9 @@ export default class ChartBuilder {
       // position = this.yAxisLabelStyle.position || position;
     }
 
-    let newHTML: string;
+    let newHTML: string = '';
 
-    this.labels.forEach((label, i) => {
+    this.labels.forEach((label: string, i: number) => {
       const x = i * this.yLabelSlotWidth
         + this.yLabelSlotWidth / 2
         + xOffset

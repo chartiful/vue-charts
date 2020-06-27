@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import ChartBuilder from '../../chart-builder/src/index';
+import ChartBuilder from '@chartiful/vue-chart-builder';
 
 export default Vue.extend({
   props: {
