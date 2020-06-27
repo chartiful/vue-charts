@@ -12,6 +12,7 @@
     "@chartiful/vue-chart-builder": "latest",
     "@chartiful/vue-horizontal-bar-graph": "latest",
     "@chartiful/vue-line-graph": "latest",
+    "@chartiful/vue-vertical-bar-graph": "latest",
     "core-js": "^3.6.5",
     "regenerator-runtime": "^0.13.5",
     "vue": "^2.6.11",
