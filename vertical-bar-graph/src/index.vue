@@ -70,15 +70,8 @@ export default Vue.extend({
 </script>
 
 <template>
-  <div
-    :style="{
-      marginTop: -(width - height) / 2,
-      marginLeft: (width - height) / 2,
-      width: height,
-      ...chartStyle,
-    }"
-  >
-    <svg :style="{ transform: 'rotate(90deg)' }" :height="height" :width="width">
+  <div :style="chartStyle">
+    <svg :height="height" :width="width">
       <g
         v-if="baseConfig.hasXAxisBackgroundLines !== false"
         v-html="chartBuilder.renderXAxisLines()"
