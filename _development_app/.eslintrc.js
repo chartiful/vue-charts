@@ -21,5 +21,7 @@ module.exports = {
   ],
   rules: {
     'import/no-extraneous-dependencies': 0,
+    'import/extensions': 0,
+    '@typescript-eslint/no-inferrable-types': 0
   },
 };

@@ -1,16 +1,15 @@
-<script lang="ts">
-import Vue from 'vue';
-import VerticalBarGraph from '../../vertical-bar-graph/src/index.vue';
-import LineGraph from '../../line-graph/src/index.vue';
-import HorizontalBarGraph from '../../horizontal-bar-graph/src/index.vue';
+<script>
+import LineGraph from '@chartiful/vue-line-graph/sfc';
+import HorizontalBarGraph from '@chartiful/vue-horizontal-bar-graph/sfc';
+import VerticalBarGraph from '../../vertical-bar-graph/sfc';
 
-export default Vue.extend({
+export default {
   components: {
     VerticalBarGraph,
     LineGraph,
     HorizontalBarGraph,
   },
-});
+};
 </script>
 
 <template>
