@@ -33,6 +33,7 @@
     "vue": "> 2.0.0",
     "@chartiful/vue-chart-builder": ">= 0.1.0"
   },
+  "homepage": "https://chartiful.io/vue/vertical-bar-graph",
   "devDependencies": {
     "@chartiful/vue-chart-builder": "latest",
     "@types/jest": "^24.0.19",

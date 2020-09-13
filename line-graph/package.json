@@ -29,6 +29,7 @@
   "bugs": {
     "url": "https://github.com/chartiful/vue-charts/issues"
   },
+  "homepage": "https://chartiful.io/vue/line-graph",
   "peerDependencies": {
     "vue": "> 2.0.0",
     "@chartiful/vue-chart-builder": ">= 0.1.0"
